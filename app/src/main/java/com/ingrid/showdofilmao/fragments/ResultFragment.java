@@ -12,27 +12,19 @@ import androidx.fragment.app.Fragment;
 import com.ingrid.showdofilmao.R;
 import com.ingrid.showdofilmao.game.GameContract;
 
-public class MenuFragment extends Fragment {
+public class ResultFragment extends Fragment {
 
     private final GameContract.Presenter presenter;
 
-    public MenuFragment(GameContract.Presenter presenter) {
+    public ResultFragment(GameContract.Presenter presenter) {
         this.presenter = presenter;
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_menu, container, false);
-        view.findViewById(R.id.btPlay).setOnClickListener(v -> {
-            onPlayClicked();
-        });
-
+        View view = inflater.inflate(R.layout.fragment_result, container, false);
         return view;
-    }
-
-    private void onPlayClicked() {
-        presenter.playClicked();
     }
 
     @Override

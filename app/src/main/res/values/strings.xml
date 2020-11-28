@@ -2,4 +2,5 @@
     <string name="app_name">Show do Filmao</string>
     <string name="menu_title">Escolha uma opção.</string>
     <string name="button_play">Jogar</string>
+    <string name="loading_message">Carregando</string>
 </resources>
