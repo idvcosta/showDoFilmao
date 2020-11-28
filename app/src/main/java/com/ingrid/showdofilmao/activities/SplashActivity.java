@@ -10,7 +10,9 @@ import com.ingrid.showdofilmao.R;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private static final long SPLASH_TIME = 5000;
+    private static final long SPLASH_TIME =
+            100;
+            //5000;
     private Handler handler;
 
     @Override
