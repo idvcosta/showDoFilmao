@@ -45,4 +45,9 @@ public class Movie {
     public void setPosterURL(String posterURL) {
         this.posterURL = posterURL;
     }
+
+    @Override
+    public String toString() {
+        return title;
+    }
 }

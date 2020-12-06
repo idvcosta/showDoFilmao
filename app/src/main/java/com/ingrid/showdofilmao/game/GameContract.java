@@ -1,6 +1,6 @@
 package com.ingrid.showdofilmao.game;
 
-import com.ingrid.showdofilmao.activities.GameActivity;
+import com.ingrid.showdofilmao.model.Game;
 
 public interface GameContract {
     interface View{
@@ -9,7 +9,7 @@ public interface GameContract {
 
         void showLoading();
 
-        void showGame();
+        void showGame(Game game);
 
         void showResult();
     }
@@ -19,5 +19,7 @@ public interface GameContract {
         void setView(View view);
 
         void playClicked();
+
+        Game getGame();
     }
 }

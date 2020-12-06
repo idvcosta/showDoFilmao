@@ -1,7 +1,5 @@
 package com.ingrid.showdofilmao.model;
 
-import android.graphics.Movie;
-
 import java.util.List;
 
 public class Question {

@@ -9,6 +9,7 @@ import com.ingrid.showdofilmao.fragments.MenuFragment;
 import com.ingrid.showdofilmao.fragments.ResultFragment;
 import com.ingrid.showdofilmao.game.GameContract;
 import com.ingrid.showdofilmao.game.GamePresenter;
+import com.ingrid.showdofilmao.model.Game;
 
 public class GameActivity extends BaseActivity implements GameContract.View {
 
@@ -33,7 +34,7 @@ public class GameActivity extends BaseActivity implements GameContract.View {
     }
 
     @Override
-    public void showGame() {
+    public void showGame(Game game) {
         replace(R.id.fragmentContainer, new GameFragment(presenter));
     }
 

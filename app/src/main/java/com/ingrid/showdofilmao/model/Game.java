@@ -9,6 +9,10 @@ public class Game {
     private int score;
     private int currentQuestionIndex = 0;
 
+    public Game(List<Question> questions){
+        this.questions = questions;
+    }
+
     public int getCurrentScore(){
         return score;
     }
