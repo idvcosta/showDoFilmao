@@ -1,11 +1,6 @@
 package com.ingrid.showdofilmao.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-
 import android.os.Bundle;
-import android.view.View;
-import android.widget.FrameLayout;
 
 import com.ingrid.showdofilmao.R;
 import com.ingrid.showdofilmao.fragments.GameFragment;
@@ -15,7 +10,7 @@ import com.ingrid.showdofilmao.fragments.ResultFragment;
 import com.ingrid.showdofilmao.game.GameContract;
 import com.ingrid.showdofilmao.game.GamePresenter;
 
-public class GameActivity extends AppCompatActivity implements GameContract.View {
+public class GameActivity extends BaseActivity implements GameContract.View {
 
     private GameContract.Presenter presenter;
 
@@ -29,26 +24,22 @@ public class GameActivity extends AppCompatActivity implements GameContract.View
 
     @Override
     public void showMenu() {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.fragmentContainer, new MenuFragment(presenter)).commit();
+        replace(R.id.fragmentContainer, new MenuFragment(presenter));
     }
 
     @Override
     public void showLoading() {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.fragmentContainer, new LoadingFragment()).commit();
+        replace(R.id.fragmentContainer, new LoadingFragment());
     }
 
     @Override
     public void showGame() {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.fragmentContainer, new GameFragment(presenter)).commit();
+        replace(R.id.fragmentContainer, new GameFragment(presenter));
     }
 
     @Override
     public void showResult() {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.fragmentContainer, new ResultFragment(presenter)).commit();
+        replace(R.id.fragmentContainer, new ResultFragment(presenter));
     }
 
     private void init() {
