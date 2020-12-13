@@ -61,21 +61,26 @@ public class GamePresenter implements GameContract.Presenter {
             view.showLoading();
         }
 
-        moviesRepository.fetchMovies(new FecthMoviesCallback() {
-
+        new Thread() {
             @Override
-            public void onMoviesFecthed(List<Movie> movies) {
-                game = moviesListToGameUseCase.execute(movies);
-                state = GameState.Game;
-                if (view != null) {
-                    view.showGame(game);
-                }
-            }
+            public void run() {
+                moviesRepository.fetchMovies(new FecthMoviesCallback() {
 
-            @Override
-            public void onFecthMoviesFailed(Throwable cause) {
+                    @Override
+                    public void onMoviesFecthed(List<Movie> movies) {
+                        game = moviesListToGameUseCase.execute(movies);
+                        state = GameState.Game;
+                        if (view != null) {
+                            view.showGame(game);
+                        }
+                    }
+
+                    @Override
+                    public void onFecthMoviesFailed(Throwable cause) {
 //TODO
+                    }
+                });
             }
-        });
+        }.start();
     }
 }
