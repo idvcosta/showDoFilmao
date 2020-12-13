@@ -38,19 +38,21 @@ public class GamePresenter implements GameContract.Presenter {
     public void setView(GameContract.View view) {
         this.view = view;
 
-        switch (this.state) {
-            case Menu:
-                view.showMenu();
-                break;
-            case Loading:
-                view.showLoading();
-                break;
-            case Game:
-                view.showGame(game);
-                break;
-            case Result:
-                view.showResult();
-                break;
+        if (view != null) {
+            switch (this.state) {
+                case Menu:
+                    view.showMenu();
+                    break;
+                case Loading:
+                    view.showLoading();
+                    break;
+                case Game:
+                    view.showGame(game);
+                    break;
+                case Result:
+                    view.showResult();
+                    break;
+            }
         }
     }
 

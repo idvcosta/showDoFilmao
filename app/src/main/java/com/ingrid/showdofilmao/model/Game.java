@@ -36,4 +36,8 @@ public class Game {
     public Question getCurrentQuestion(){
         return questions.get(currentQuestionIndex);
     }
+
+    public Question getQuestion(int position) {
+        return questions.get(position);
+    }
 }

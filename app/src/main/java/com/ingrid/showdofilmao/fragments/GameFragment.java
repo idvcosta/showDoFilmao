@@ -9,8 +9,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.ingrid.showdofilmao.R;
+import com.ingrid.showdofilmao.adapters.QuestionsAdapter;
 import com.ingrid.showdofilmao.game.GameContract;
 import com.ingrid.showdofilmao.model.Game;
 import com.ingrid.showdofilmao.model.Question;
@@ -18,7 +20,7 @@ import com.ingrid.showdofilmao.model.Question;
 public class GameFragment extends Fragment {
 
     private final GameContract.Presenter presenter;
-    private TextView tv;
+    private ViewPager2 vpQuestions;
 
     public GameFragment(GameContract.Presenter presenter) {
         this.presenter = presenter;
@@ -28,7 +30,7 @@ public class GameFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_game, container, false);
-        tv = view.findViewById(R.id.tv);
+        vpQuestions = view.findViewById(R.id.vpQuestions);
 
         return view;
     }
@@ -39,8 +41,7 @@ public class GameFragment extends Fragment {
 
         Game game = presenter.getGame();
         Question currentQuestion = game.getCurrentQuestion();
-        String title = currentQuestion.getMovie().getTitle();
 
-        tv.setText(title);
+     vpQuestions.setAdapter(new QuestionsAdapter(game, this));
     }
 }
