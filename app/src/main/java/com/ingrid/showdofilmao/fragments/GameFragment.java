@@ -40,8 +40,7 @@ public class GameFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         Game game = presenter.getGame();
-        Question currentQuestion = game.getCurrentQuestion();
 
-     vpQuestions.setAdapter(new QuestionsAdapter(game, this));
+        vpQuestions.setAdapter(new QuestionsAdapter(game, this));
     }
 }
