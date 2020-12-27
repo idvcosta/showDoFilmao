@@ -42,6 +42,8 @@ public class MoviesListToGameUseCase {
         if (!selectedMovies.contains(movie)) {
             selectedMovies.remove(0);
             selectedMovies.add(movie);
+
+            Collections.shuffle(selectedMovies);
         }
 
         for (Movie selectedMovie : selectedMovies) {
