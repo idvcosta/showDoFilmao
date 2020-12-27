@@ -25,9 +25,11 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.OptionHo
     }
 
     private List<Option> options;
+    private OptionSelectedListener optionSelectedListener;
 
-    public OptionsAdapter(List<Option> options) {
+    public OptionsAdapter(List<Option> options, OptionSelectedListener optionSelectedListener) {
         this.options = options;
+        this.optionSelectedListener = optionSelectedListener;
     }
 
     @NonNull
@@ -36,6 +38,10 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.OptionHo
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.row_option, parent, false);
         Button btOption = view.findViewById(R.id.btOption);
+        btOption.setOnClickListener(source -> {
+            Option option = (Option) source.getTag();
+             optionSelectedListener.onOptionSelected(option);
+        });
 
         OptionHolder holder = new OptionHolder(view, btOption);
 
@@ -47,6 +53,7 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.OptionHo
         Option option = options.get(position);
 
         holder.btOption.setText(option.getMovie().getTitle());
+        holder.btOption.setTag(option);
     }
 
     @Override

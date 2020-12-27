@@ -11,11 +11,13 @@ import com.ingrid.showdofilmao.model.Question;
 public class QuestionsAdapter extends FragmentStateAdapter {
 
     private Game game;
+    private OptionSelectedListener optionSelectedListener;
 
-    public QuestionsAdapter(Game game, Fragment parent) {
+    public QuestionsAdapter(Game game, Fragment parent, OptionSelectedListener optionSelectedListener) {
         super(parent);
 
         this.game = game;
+        this.optionSelectedListener = optionSelectedListener;
     }
 
     @NonNull
@@ -23,7 +25,7 @@ public class QuestionsAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         Question question = game.getQuestion(position);
 
-        return new QuestionFragment(question);
+        return new QuestionFragment(question, optionSelectedListener);
     }
 
     @Override

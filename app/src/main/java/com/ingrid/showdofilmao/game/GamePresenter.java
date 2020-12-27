@@ -3,13 +3,14 @@ package com.ingrid.showdofilmao.game;
 import com.ingrid.showdofilmao.game.usecases.MoviesListToGameUseCase;
 import com.ingrid.showdofilmao.model.Game;
 import com.ingrid.showdofilmao.model.Movie;
+import com.ingrid.showdofilmao.model.Option;
 import com.ingrid.showdofilmao.repositories.FecthMoviesCallback;
 import com.ingrid.showdofilmao.repositories.MoviesRepository;
 
 import java.util.List;
 
 enum GameState {
-    Menu, Loading, Game, Result
+    Menu, Loading, Game, Result, Error
 }
 
 public class GamePresenter implements GameContract.Presenter {
@@ -25,7 +26,7 @@ public class GamePresenter implements GameContract.Presenter {
 
     public GamePresenter() {
         state = GameState.Menu;
-        moviesRepository = new MoviesRepository();
+        moviesRepository =  MoviesRepository.getInstance();
         moviesListToGameUseCase = new MoviesListToGameUseCase(DEFAULT_OPTIONS_QUANTITY);
     }
 
@@ -52,6 +53,9 @@ public class GamePresenter implements GameContract.Presenter {
                 case Result:
                     view.showResult();
                     break;
+                case Error:
+                    view.showError();
+                    break;
             }
         }
     }
@@ -63,26 +67,50 @@ public class GamePresenter implements GameContract.Presenter {
             view.showLoading();
         }
 
-        new Thread() {
+        new Thread(() -> moviesRepository.fetchMovies(new FecthMoviesCallback() {
+
             @Override
-            public void run() {
-                moviesRepository.fetchMovies(new FecthMoviesCallback() {
-
-                    @Override
-                    public void onMoviesFecthed(List<Movie> movies) {
-                        game = moviesListToGameUseCase.execute(movies);
-                        state = GameState.Game;
-                        if (view != null) {
-                            view.showGame(game);
-                        }
-                    }
-
-                    @Override
-                    public void onFecthMoviesFailed(Throwable cause) {
-//TODO
-                    }
-                });
+            public void onMoviesFetched(List<Movie> movies) {
+                game = moviesListToGameUseCase.execute(movies);
+                state = GameState.Game;
+                if (view != null) {
+                    view.showGame(game);
+                }
             }
-        }.start();
+
+            @Override
+            public void onFetchMoviesFailed(Throwable cause) {
+                state = GameState.Result;
+
+                if(view!=null){
+                    view.showError();
+                }
+            }
+        })).start();
+    }
+
+    @Override
+    public void onOptionSelected(Option option) {
+        if (option.isCorrectOption()) {
+            game.increaseScore();
+
+            if (view != null) {
+                view.updateScore(game.getCurrentScore());
+            }
+        }
+
+        boolean gameEnded = game.getQuestionsCount() == game.getCurrentQuestionIndex();
+        game.goToNextQuestion();
+
+        if (gameEnded) {
+            state = GameState.Result;
+            if (view != null) {
+                view.showResult();
+            }
+        } else {
+            if (view != null) {
+                view.goToNextQuestion();
+            }
+        }
     }
 }

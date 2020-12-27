@@ -1,5 +1,6 @@
 package com.ingrid.showdofilmao.game;
 
+import com.ingrid.showdofilmao.adapters.OptionSelectedListener;
 import com.ingrid.showdofilmao.model.Game;
 
 public interface GameContract {
@@ -12,9 +13,15 @@ public interface GameContract {
         void showGame(Game game);
 
         void showResult();
+
+        void updateScore(int currentScore);
+
+        void goToNextQuestion();
+
+        void showError();
     }
 
-    interface Presenter{
+    interface Presenter extends OptionSelectedListener {
 
         void setView(View view);
 
