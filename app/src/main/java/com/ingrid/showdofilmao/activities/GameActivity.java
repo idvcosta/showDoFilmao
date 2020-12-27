@@ -2,7 +2,10 @@ package com.ingrid.showdofilmao.activities;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
+
 import com.ingrid.showdofilmao.R;
+import com.ingrid.showdofilmao.fragments.ErrorFragment;
 import com.ingrid.showdofilmao.fragments.GameFragment;
 import com.ingrid.showdofilmao.fragments.LoadingFragment;
 import com.ingrid.showdofilmao.fragments.MenuFragment;
@@ -43,12 +46,35 @@ public class GameActivity extends BaseActivity implements GameContract.View {
         replace(R.id.fragmentContainer, new ResultFragment(presenter));
     }
 
+    @Override
+
+    public void showError() { replace(R.id.fragmentContainer, new ErrorFragment());
+    }
+
+    @Override
+    public void updateScore(int currentScore) {
+        GameFragment gameFragment = (GameFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentContainer);
+        gameFragment.updateScore(currentScore);
+    }
+
+    @Override
+    public void goToNextQuestion() {
+        GameFragment gameFragment = (GameFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentContainer);
+        gameFragment.goToNextQuestion();
+    }
+
     private void init() {
         presenter = (GameContract.Presenter) getLastCustomNonConfigurationInstance();
 
         if (presenter == null) {
             presenter = new GamePresenter();
         }
+    }
+
+    @Nullable
+    @Override
+    public Object onRetainCustomNonConfigurationInstance() {
+        return presenter;
     }
 
     @Override
