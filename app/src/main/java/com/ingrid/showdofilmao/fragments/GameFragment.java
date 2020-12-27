@@ -37,7 +37,9 @@ public class GameFragment extends Fragment {
         vpQuestions = view.findViewById(R.id.vpQuestions);
         tvScore = view.findViewById(R.id.tvScore);
         tvStep = view.findViewById(R.id.tvStep);
+
         updateScore(0);
+        vpQuestions.setUserInputEnabled(false);
 
         return view;
     }
@@ -58,7 +60,7 @@ public class GameFragment extends Fragment {
     }
 
     public void updateScore(int currentScore) {
-        tvScore.setText(currentScore +" pontos");
+        tvScore.setText(currentScore + " pontos");
     }
 
     public void goToNextQuestion() {

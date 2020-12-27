@@ -4,6 +4,7 @@ import com.ingrid.showdofilmao.game.usecases.MoviesListToGameUseCase;
 import com.ingrid.showdofilmao.model.Game;
 import com.ingrid.showdofilmao.model.Movie;
 import com.ingrid.showdofilmao.model.Option;
+import com.ingrid.showdofilmao.repositories.Constants;
 import com.ingrid.showdofilmao.repositories.FecthMoviesCallback;
 import com.ingrid.showdofilmao.repositories.MoviesRepository;
 
@@ -71,6 +72,8 @@ public class GamePresenter implements GameContract.Presenter {
 
             @Override
             public void onMoviesFetched(List<Movie> movies) {
+                movies = movies.subList(0, Constants.MAX_MOVIES);
+
                 game = moviesListToGameUseCase.execute(movies);
                 state = GameState.Game;
                 if (view != null) {
