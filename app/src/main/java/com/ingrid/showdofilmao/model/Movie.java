@@ -1,17 +1,28 @@
 package com.ingrid.showdofilmao.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.google.gson.annotations.SerializedName;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Movie {
 
     private String title;
-    private String gender;
-    private int year;
+    //    private String gender;]
+    @SerializedName("release_date")
+    private String year;
+    @SerializedName("poster_path")
     private String posterURL;
 
-    public Movie(String title, String gender, int year, String posterURL) {
-        this.title = title;
-        this.gender = gender;
+    public Movie() {
+
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
         this.year = year;
-        this.posterURL = posterURL;
     }
 
     public String getTitle() {
@@ -22,21 +33,6 @@ public class Movie {
         this.title = title;
     }
 
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
 
     public String getPosterURL() {
         return posterURL;
