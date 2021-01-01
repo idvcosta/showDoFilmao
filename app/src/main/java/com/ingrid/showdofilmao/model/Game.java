@@ -40,4 +40,19 @@ public class Game {
     public Question getQuestion(int position) {
         return questions.get(position);
     }
+
+    public GameResultType getResult() {
+        int maxScore = getQuestionsCount() * SCORE_INCREASE;
+        int getCurrentScore = getCurrentScore();
+        double relativeScore = (float) getCurrentScore / maxScore;
+
+        GameResultType result = GameResultType.BAD;
+
+        if(relativeScore > 0.7){
+            result = GameResultType.AWESOME;
+        }else if (relativeScore > 0.4){
+            result = GameResultType.OK;
+        }
+        return result;
+    }
 }

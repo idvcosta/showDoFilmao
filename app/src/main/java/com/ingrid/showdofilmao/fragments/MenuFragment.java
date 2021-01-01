@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import com.ingrid.showdofilmao.R;
 import com.ingrid.showdofilmao.game.GameContract;
+import com.ingrid.showdofilmao.game.GameMode;
 
 public class MenuFragment extends Fragment {
 
@@ -24,15 +25,19 @@ public class MenuFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_menu, container, false);
-        view.findViewById(R.id.btPlay).setOnClickListener(v -> {
-            onPlayClicked();
+        view.findViewById(R.id.btPlayByTitle).setOnClickListener(v -> {
+            onPlayClicked(GameMode.ByTitle);
+        });
+
+        view.findViewById(R.id.btPlayByYear).setOnClickListener(v -> {
+            onPlayClicked(GameMode.ByYear);
         });
 
         return view;
     }
 
-    private void onPlayClicked() {
-        presenter.playClicked();
+    private void onPlayClicked(GameMode gameMode) {
+        presenter.playClicked(gameMode);
     }
 
     @Override

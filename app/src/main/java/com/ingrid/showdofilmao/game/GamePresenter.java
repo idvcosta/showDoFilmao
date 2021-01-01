@@ -24,6 +24,7 @@ public class GamePresenter implements GameContract.Presenter {
 
     private MoviesListToGameUseCase moviesListToGameUseCase;
     private Game game;
+    private GameMode gameMode;
 
     public GamePresenter() {
         state = GameState.Menu;
@@ -34,6 +35,11 @@ public class GamePresenter implements GameContract.Presenter {
     @Override
     public Game getGame() {
         return game;
+    }
+
+    @Override
+    public GameMode getGameMode(){
+        return gameMode;
     }
 
     @Override
@@ -62,7 +68,8 @@ public class GamePresenter implements GameContract.Presenter {
     }
 
     @Override
-    public void playClicked() {
+    public void playClicked(GameMode gameMode) {
+        this.gameMode = gameMode;
         this.state = GameState.Loading;
         if (view != null) {
             view.showLoading();
@@ -114,6 +121,14 @@ public class GamePresenter implements GameContract.Presenter {
             if (view != null) {
                 view.goToNextQuestion();
             }
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        state = GameState.Menu;
+        if(view != null){
+            view.showMenu();
         }
     }
 }

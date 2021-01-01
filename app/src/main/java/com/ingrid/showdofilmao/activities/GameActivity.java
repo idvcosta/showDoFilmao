@@ -88,4 +88,9 @@ public class GameActivity extends BaseActivity implements GameContract.View {
         super.onPause();
         presenter.setView(null);
     }
+
+    @Override
+    public void onBackPressed() {
+        presenter.onBackPressed();
+    }
 }

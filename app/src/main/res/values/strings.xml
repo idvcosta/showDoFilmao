@@ -1,7 +1,13 @@
 <resources>
     <string name="app_name">Show do Filmao</string>
-    <string name="menu_title">Escolha uma opção.</string>
-    <string name="button_play">Jogar</string>
+    <string name="menu_title">Escolha um modo de jogo.</string>
+    <string name="button_play_by_title">Por título</string>
+    <string name="button_play_by_year">Por ano</string>
     <string name="loading_message">Carregando</string>
     <string name="error_message">Ocorreu um erro. Tente novamente mais tarde</string>
+    <string name="result_title">Sua pontuação foi:</string>
+    <string name="result_score">%d pontos</string>
+    <string name="message_result_bad">Você precisa ver mais filmes!</string>
+    <string name="message_result_ok">Foi bem! Mas precisa melhorar.</string>
+    <string name="message_result_awesome">Parabéns, você entende muito de cinema!</string>
 </resources>

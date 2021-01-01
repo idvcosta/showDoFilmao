@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ingrid.showdofilmao.R;
+import com.ingrid.showdofilmao.game.GameMode;
 import com.ingrid.showdofilmao.model.Option;
 
 import java.util.List;
@@ -26,10 +27,12 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.OptionHo
 
     private List<Option> options;
     private OptionSelectedListener optionSelectedListener;
+    private GameMode gameMode;
 
-    public OptionsAdapter(List<Option> options, OptionSelectedListener optionSelectedListener) {
+    public OptionsAdapter(List<Option> options, OptionSelectedListener optionSelectedListener,@NonNull GameMode gameMode) {
         this.options = options;
         this.optionSelectedListener = optionSelectedListener;
+        this.gameMode = gameMode;
     }
 
     @NonNull
@@ -52,7 +55,16 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.OptionHo
     public void onBindViewHolder(@NonNull OptionHolder holder, int position) {
         Option option = options.get(position);
 
-        holder.btOption.setText(option.getMovie().getTitle());
+        String optionText = null;
+        switch (gameMode){
+            case ByTitle:
+                optionText = option.getMovie().getTitle();
+                break;
+            case ByYear:
+                optionText = option.getMovie().getYear();
+                break;
+        }
+        holder.btOption.setText(optionText);
         holder.btOption.setTag(option);
     }
 

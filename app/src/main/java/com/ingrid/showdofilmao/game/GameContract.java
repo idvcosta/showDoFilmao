@@ -23,10 +23,14 @@ public interface GameContract {
 
     interface Presenter extends OptionSelectedListener {
 
+        GameMode getGameMode();
+
         void setView(View view);
 
-        void playClicked();
+        void playClicked(GameMode gameMode);
 
         Game getGame();
+
+        void onBackPressed();
     }
 }

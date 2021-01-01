@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.ingrid.showdofilmao.R;
 import com.ingrid.showdofilmao.adapters.OptionSelectedListener;
 import com.ingrid.showdofilmao.adapters.OptionsAdapter;
+import com.ingrid.showdofilmao.game.GameMode;
 import com.ingrid.showdofilmao.model.Option;
 import com.ingrid.showdofilmao.model.Question;
 
@@ -27,11 +27,13 @@ public class QuestionFragment extends Fragment {
 
     private Question question;
     private OptionSelectedListener optionSelectedListener;
+    private GameMode gameMode;
     private ImageView ivCover;
 
-    public QuestionFragment(Question question, OptionSelectedListener optionSelectedListener) {
+    public QuestionFragment(Question question, OptionSelectedListener optionSelectedListener, GameMode gameMode) {
         this.question = question;
         this.optionSelectedListener = optionSelectedListener;
+        this.gameMode = gameMode;
     }
 
     @Nullable
@@ -43,7 +45,7 @@ public class QuestionFragment extends Fragment {
 
         List<Option> options = question.getOptions();
 
-        rvOptions.setAdapter(new OptionsAdapter(options, optionSelectedListener));
+        rvOptions.setAdapter(new OptionsAdapter(options, optionSelectedListener, gameMode));
 
         return view;
     }

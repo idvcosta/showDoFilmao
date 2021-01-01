@@ -52,7 +52,7 @@ public class GameFragment extends Fragment {
         stepTotal = game.getQuestionsCount();
         setCurrentStep(1);
 
-        vpQuestions.setAdapter(new QuestionsAdapter(game, this, presenter));
+        vpQuestions.setAdapter(new QuestionsAdapter(game, this, presenter, presenter.getGameMode()));
     }
 
     private void setCurrentStep(int currentStep) {
