@@ -75,7 +75,7 @@ public class GamePresenter implements GameContract.Presenter {
             view.showLoading();
         }
 
-        new Thread(() -> moviesRepository.fetchMovies(new FecthMoviesCallback() {
+        new Thread(() -> moviesRepository.fetchMovies(gameMode, new FecthMoviesCallback() {
 
             @Override
             public void onMoviesFetched(List<Movie> movies) {
